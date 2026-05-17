@@ -127,6 +127,35 @@ claude mcp add blender uvx blender-mcp
 
 </details>
 
+### Codex CLI / IDE 扩展集成
+
+根据 OpenAI 官方文档，Codex CLI 与 IDE 扩展共享同一份 MCP 配置，因此只需要配置一次。
+
+1. 确保 `codex` 与 `uvx` 都已经安装，并且可以在终端中直接运行。
+2. 运行以下命令，把 Blender MCP 添加到 Codex：
+
+```bash
+codex mcp add blender_mcp -- uvx blender-mcp
+```
+
+3. 用以下命令确认配置已经生效：
+
+```bash
+codex mcp list
+```
+
+4. 如果 Codex CLI、IDE 扩展或 Codex App 已经打开，请重启它们以重新加载 MCP 配置。
+
+你也可以手动编辑 `~/.codex/config.toml`：
+
+```toml
+[mcp_servers.blender_mcp]
+command = "uvx"
+args = ["blender-mcp"]
+```
+
+如果你刚在 Windows 上把 `uv` 加入 PATH，记得先重启终端，必要时再重启 Codex。
+
 ### Cursor 集成
 
 [![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/link/mcp%2Finstall?name=blender&config=eyJjb21tYW5kIjoidXZ4IGJsZW5kZXItbWNwIn0%3D)
@@ -210,6 +239,21 @@ _前置条件_：继续之前，请先确保你已经安装 [Visual Studio Code]
 - 在 Blender 中执行任意 Python 代码
 - 通过 [Poly Haven](https://polyhaven.com/) 下载合适的模型、素材和 HDRI
 - 通过 [Hyper3D Rodin](https://hyper3d.ai/) 生成 AI 3D 模型
+
+### 与 Codex 配合使用
+
+1. 先按上文步骤把 `blender_mcp` 添加到 Codex。
+2. 按下文步骤安装并启用 Blender 插件 `addon.py`。
+3. 在 Blender 侧边栏点击 `Connect to Claude`。按钮名称虽然写的是 Claude，但它启动的是 Blender 端的 Socket 服务，Codex 同样使用这个连接。
+4. 在 Codex CLI、IDE 扩展或 Codex App 中打开你的项目，然后直接让 Codex 调用 Blender MCP 工具。
+5. 建议同一时间只使用一个 Blender MCP 客户端，避免和 Claude、Cursor 等同时连接。
+
+你可以直接给 Codex 这样的指令：
+
+- “创建一个低多边形城堡庭院场景”
+- “把当前选中的物体改成磨砂金属材质”
+- “下载一个适合沙漠场景的 HDRI 并应用到当前场景”
+- “查看当前场景并把主相机调整成等轴测视角”
 
 ### 示例指令
 

@@ -127,6 +127,35 @@ claude mcp add blender uvx blender-mcp
 
 </details>
 
+### Codex CLI / IDE Extension Integration
+
+According to OpenAI's official documentation, the Codex CLI and IDE extension share the same MCP configuration, so you only need to set it up once.
+
+1. Make sure both `codex` and `uvx` are installed and available in your terminal.
+2. Run the following command to add Blender MCP to Codex:
+
+```bash
+codex mcp add blender_mcp -- uvx blender-mcp
+```
+
+3. Verify that the configuration was added successfully:
+
+```bash
+codex mcp list
+```
+
+4. If the Codex CLI, IDE extension, or Codex App is already open, restart it so the new MCP configuration is reloaded.
+
+You can also edit `~/.codex/config.toml` manually:
+
+```toml
+[mcp_servers.blender_mcp]
+command = "uvx"
+args = ["blender-mcp"]
+```
+
+If you just added `uv` to PATH on Windows, restart your terminal first, and restart Codex if needed.
+
 ### Cursor Integration
 
 [![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/link/mcp%2Finstall?name=blender&config=eyJjb21tYW5kIjoidXZ4IGJsZW5kZXItbWNwIn0%3D)
@@ -210,6 +239,21 @@ Once the config file has been set in Claude, and the addon is running in Blender
 - Execute arbitrary Python code in Blender
 - Download matching models, assets, and HDRIs through [Poly Haven](https://polyhaven.com/)
 - Generate 3D models through [Hyper3D Rodin](https://hyper3d.ai/)
+
+### Using with Codex
+
+1. First, add `blender_mcp` to Codex using the steps above.
+2. Install and enable the Blender addon `addon.py` using the instructions below.
+3. In Blender, click `Connect to Claude` in the sidebar. The button still says Claude, but it starts the Blender-side socket service that Codex uses as well.
+4. Open your project in the Codex CLI, IDE extension, or Codex App, then ask Codex to use the Blender MCP tools.
+5. It is best to use only one Blender MCP client at a time, instead of connecting Codex, Claude, and Cursor simultaneously.
+
+Here are a few Codex prompt examples:
+
+- "Create a low poly castle courtyard scene"
+- "Change the selected object to a brushed metal material"
+- "Download an HDRI suitable for a desert scene and apply it to the current scene"
+- "Inspect the current scene and move the main camera to an isometric angle"
 
 ### Example Commands
 
